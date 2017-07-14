@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body>
+
+    <% include ../views/partials/header %>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="text-center">
+              <h1>Sign Up</h1>
+              <p>Welcome to Sign Up Page</p>
+            </div>
+
+            <div class="message"></div>
+
+            <form id="regForm" method="post">
+              <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input id="first_name" type="text" name="first_name" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input id="last_name" type="text" name="last_name" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" class="form-control" required>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-success">Sign up</button>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,1 @@
+INSERT INTO `questionnaire_db`.`users` (`first_name`, `last_name`, `email`, `type`, `token`) VALUES ('admin', 'admin','admin@admin.com', 'admin', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdF9uYW1lIjoiYWRtaW4iLCJsYXN0X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwidHlwZSI6ImFkbWluIiwiaWF0IjoxNDk4OTExNTg4fQ.XNIvu-OZR3uRW3ueAj0dyoB6sPpPzHyCECnxnD5tsyA');

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+    <title>Document</title>
+</head>
+<body>
+
+<% include ../views/partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-md-offset-3">
+
+            <form action="#" id="editQuestion" name="editQuestion">
+                <% for(var i = 0; i < question.length; i++) { %>
+                <div>
+                    <label for="edit_q"></label>
+                    <textarea  class="form-control" id="edit_q" required><%= question[i].text %></textarea>
+                </div>
+
+                <% switch(question[i].type) {
+
+                    case 'Yes/No':
+                %>
+                <div>
+                    <label for="answer_1"></label>
+                    <input class="form-control" id="answer_1" type="text" value="<%= question[i].answer_1 %>"  required />
+                </div>
+
+                <div>
+                    <label for="answer_1"></label>
+                    <input class="form-control" id="answer_2" type="text" value="<%= question[i].answer_2 %>"  required />
+                </div>
+
+                <% break;
+
+                    default : %>
+
+                <div>
+                    <label for="answer_1"></label>
+                    <input class="form-control" id="answer_1" type="text" value="<%= question[i].answer_1 %>"  required />
+                </div>
+
+                <div>
+                    <label for="answer_2"></label>
+                    <input class="form-control" id="answer_2" type="text" value="<%= question[i].answer_2 %>" required />
+                </div>
+
+                <div>
+                    <label for="answer_3"></label>
+                    <input class="form-control" id="answer_3" type="text" value="<%= question[i].answer_3 %>" required />
+                </div>
+
+                <div>
+                    <label for="answer_4"></label>
+                    <input class="form-control" id="answer_4" type="text" value="<%= question[i].answer_4 %>" required />
+                </div>
+
+                <% } %>
+
+                <br>
+
+                <button class="btn btn-primary" type="submit" onClick="edit(<%= question[i].id %>)">Save</button>
+                <a href="/dashboard" class="btn btn-info">Dashboard</a>
+                <% } %>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script src="/javascripts/main.js"></script>
+
+
+<script>
+
+
+    function edit(question_id) {
+        console.log('editujem pitanje id ' + question_id);
+
+        var editData = {
+            edit_q: $('#edit_q').val(),
+            answer_1: $('#answer_1').val(),
+            answer_2: $('#answer_2').val(),
+            answer_3: $('#answer_3').val(),
+            answer_4: $('#answer_4').val()
+        };
+
+        $.ajax({
+            url: '/api/editQuestions/' + question_id,
+            type: 'PUT',
+            data: editData,
+            success: function(res) {
+                location.reload();
+            },
+            error: function(xhr,status,err) {
+                return false;
+            }
+        });
+    }
+
+
+</script>
+
+
+
+</body>
+</html>

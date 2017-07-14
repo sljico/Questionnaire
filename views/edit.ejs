@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+    <title>Document</title>
+</head>
+<body>
+
+
+<% include ../views/partials/header %>
+
+
+<table class="table">
+    <% for(var i = 0; i < questions.length; i++) { %>
+
+    <tr>
+        <td><a href="/editSingle/<%= questions[i].id %>"><%= questions[i].text %></a></td>
+        <td class="col-md-2">
+            <div class="btn-toolbar">
+                <a href="/editSingle/<%= questions[i].id %>" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a>
+                <a href="#" onClick="deleteQuestion(<%= questions[i].id %>)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+            </div>
+        </td>
+    </tr>
+
+    <% } %>
+</table>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script src="/javascripts/main.js"></script>
+
+
+<script>
+
+
+    function deleteQuestion(question_id) {
+        console.log('brisem pitanje ' + question_id);
+
+        $.ajax({
+            url: '/api/deleteQuestions/' + question_id,
+            type: 'DELETE',
+            success: function(res) {
+                window.location.reload();
+                return false;
+            },
+            error: function(xhr, status, err) {
+                console.log(xhr.responseText);
+                console.log("Error deleting");
+                return false;
+            }
+        });
+    }
+
+
+</script>
+
+</body>
+</html>

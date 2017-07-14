@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Document</title>
+</head>
+<body>
+
+
+<% include ../views/partials/header %>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-md-offset-3">
+            <form action="#" id="questionnaireResult" name="questionnaireResult">
+
+
+                <input type="hidden" name="questionnaireID" value="<%= questionnaireData.questionnaire_id %>">
+                <input type="hidden" name="userID" value="<%= questionnaireData.userID %>">
+
+                <ul>
+                    <% for(var i = 0; i < questions.length; i++) { %>
+                    <li id="question_<%= questions[i].id %>">
+                        <div class="text">
+                            <%= questions[i].text %>
+                            <ul>
+
+                                <%  if(questions[i].answer_1) { %>
+
+                                <li><% switch(questions[i].type) {
+
+                                    case 'Yes/No':
+
+                                        var id_1 = Math.floor(Math.random() * 1000);
+                                        var id_2 = Math.floor(Math.random() * 1000);
+                                    %>
+                                    <div>
+                                        <label for="answer_<%= id_1 %>"><%= questions[i].answer_1 %></label>
+                                        <input value="<%= questions[i].answer_1 %>" id="answer_<%= id_1 %>" type="radio" name="answer_<%= questions[i].id %>">
+                                    </div>
+                                    <div>
+                                        <label for="answer_<%= id_2 %>"><%= questions[i].answer_2 %></label>
+                                        <input value="<%= questions[i].answer_2 %>" id="answer_<%= id_2 %>" type="radio" name="answer_<%= questions[i].id %>">
+                                    </div>
+                                    <% break;
+
+                                    case 'Multiple Choice':
+
+                                        var id_4 = Math.floor(Math.random() * 1000);
+                                        var id_5 = Math.floor(Math.random() * 1000);
+                                        var id_6 = Math.floor(Math.random() * 1000);
+                                        var id_7 = Math.floor(Math.random() * 1000);
+
+                                    %>
+                                    <div>
+                                        <label for="answer_<%= id_4 %>"><%= questions[i].answer_1 %></label>
+                                        <input value="<%= questions[i].answer_1 %>" id="answer_<%= id_4 %>" type="checkbox" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+                                    <div>
+                                        <label for="answer_<%= id_5 %>"><%= questions[i].answer_2 %></label>
+                                        <input value="<%= questions[i].answer_2 %>" id="answer_<%= id_5 %>" type="checkbox" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+                                    <div>
+                                        <label for="answer_<%= id_6 %>"><%= questions[i].answer_3 %></label>
+                                        <input value="<%= questions[i].answer_3 %>" id="answer_<%= id_6 %>" type="checkbox" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+                                    <div>
+                                        <label for="answer_<%= id_7 %>"><%= questions[i].answer_4 %></label>
+                                        <input value="<%= questions[i].answer_4 %>" id="answer_<%= id_7 %>" type="checkbox" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+
+                                    <% break;
+
+                                    case 'Single Choice':
+
+
+                                        var id_8 = Math.floor(Math.random() * 1000);
+                                        var id_9 = Math.floor(Math.random() * 1000);
+                                        var id_10 = Math.floor(Math.random() * 1000);
+                                        var id_11 = Math.floor(Math.random() * 1000);
+                                    %>
+
+                                    <div>
+                                        <label for="answer_<%= id_8 %>"><%= questions[i].answer_1 %></label>
+                                        <input value="<%= questions[i].answer_1 %>" id="answer_<%= id_8 %>" type="radio" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+                                    <div>
+                                        <label for="answer_<%= id_9 %>"><%= questions[i].answer_2 %></label>
+                                        <input value="<%= questions[i].answer_2 %>" id="answer_<%= id_9 %>" type="radio" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+                                    <div>
+                                        <label for="answer_<%= id_10 %>"><%= questions[i].answer_3 %></label>
+                                        <input value="<%= questions[i].answer_3 %>" id="answer_<%= id_10 %>" type="radio" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+                                    <div>
+                                        <label for="answer_<%= id_11 %>"><%= questions[i].answer_4 %></label>
+                                        <input value="<%= questions[i].answer_4 %>" id="answer_<%= id_11 %>" type="radio" name="answer_<%= questions[i].id %>">
+                                    </div>
+
+                                    <% break;
+
+                                    } %>
+                                </li>
+
+                                <%  } %>
+
+
+
+                            </ul>
+
+                        </div>
+                    </li>
+                    <% } %>
+                </ul>
+
+                <div class="resultsResponse"></div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a href="/welcome" class="btn btn-info">Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+<script src="/javascripts/main.js"></script>
+
+</body>
+</html>

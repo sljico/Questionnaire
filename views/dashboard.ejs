@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+    <% include ../views/partials/header %>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4>Dodaj novi upitnik</h4>
+                <a href="/addQuestionnaire" class="btn btn-info">Add</a>
+            </div>
+        </div>
+        <div style="margin-top: 50px;" class="row">
+            <% JSON.parse(items).forEach(function(item) { %>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3><%= item.title %></h3>
+                        <p>
+                            <a href="/edit/<%= item.id %>" class="btn btn-info" role="button">Edit</a>
+                            <a href="#" onClick="deleteQuestionnaire(<%= item.id %>)" class="btn btn-danger" role="button">Delete</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% })%>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+
+
+    <script type="text/javascript">
+        // Delete Questionnaire
+        function deleteQuestionnaire(questionnaire_id) {
+            console.log('brisem anketu ' + questionnaire_id);
+
+             $.ajax({
+                 url: '/api/deleteQuestionnaire/' + questionnaire_id,
+                 type: 'DELETE',
+                 success: function(res) {
+                     window.location.reload();
+                     return false;
+                 },
+                 error: function(xhr, status, err) {
+                     console.log(xhr.responseText);
+                     console.log("Error deleting");
+                     return false;
+                 }
+             });
+
+        }
+    </script>
+
+</body>
+</html>
