@@ -11,7 +11,7 @@ Next install all of Node dependencies with npm and start the web server
 `npm install`,
 
 Create a new MySQL database `node scripts/create_database.js`,
-Add admin into database use query from `query.txt`
+Add admin into database using query from `query.txt`
 
 `npm start`
 
