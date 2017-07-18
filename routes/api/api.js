@@ -80,8 +80,8 @@ module.exports.authenticate = function (req, res) {
 
 
 module.exports.submitData = function (req, res) {
-    console.log(req.body);
     var userId = parseInt(req.body[1].value);
+    var questionnaireId = parseInt(req.body[0].value);
     var data = [];
     var answerValue = [];
 
@@ -106,10 +106,11 @@ module.exports.submitData = function (req, res) {
     for(var j = 0; j < data.length; j++) {
         answerValue.push(data[j]);
     }
+
     var sql = 'INSERT INTO results (userID, questionnaireID, questionID, answer) VALUES ?';
 
 
-    connection.query('SELECT * FROM results WHERE userID = ?', [userId], function(err, rows) {
+    connection.query('SELECT * FROM results WHERE userID = ? AND questionnaireID =?', [userId,questionnaireId ], function(err, rows) {
         if(err) {
             res.json({
                 status: 500,
